@@ -79,11 +79,11 @@ void terminal_writestring(const char* data)
 		terminal_write(data, strlen(data));
 }
 
-void setVideoMode()  {
+void setVideoMode13()  {
 
 	asm ( "nop\n"
-	      "push %eax\n"
-	      "pop %eax"       );
+	      "call set_mode_0x13\n"
+	      "nop"       );
 }
 
 int test()  {

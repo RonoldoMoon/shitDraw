@@ -15,11 +15,12 @@ hello:
 	@echo '                ||----w | '
 	@echo '                ||     || '
 
-build myos.bin: kernel.c boot.s function.c linker.ld
+build myos.bin: kernel.c boot.s function.c linker.ld graphics.s
+	nasm -f elf32 graphics.s -o graphics.o
 	i686-elf-as boot.s -o boot.o
 	i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 	i686-elf-gcc -c function.c -o function.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-	i686-elf-gcc -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o function.o -lgcc
+	i686-elf-gcc -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o function.o graphics.o -lgcc
 
 
 
