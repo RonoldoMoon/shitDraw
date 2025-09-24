@@ -9,6 +9,9 @@
 #if !defined(__i386__)
 #error "This tutorial needs to be compiled with a ix86-elf compiler"
 #endif
+#define VIDEO_MEM 0xA0000
+#define VIDEO_RES_X 320
+#define VIDEO_RES_Y 200
 
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) 
 {
@@ -147,4 +150,17 @@ void writeStringColor(const char* data, uint8_t color )  {
 			terminal_putcharCOLOR(data[i], color);
 		}
 
+}
+
+//position wil be for the center of the sprite.
+void putSprite(const uint8_t* p, uint8_t size_x, uint8_t size_y, uint8_t pos_x, uint8_t pos_y, uint8_t mask)  {
+
+	for ( uint8_t y = 0; y < size_y; y++ )  {
+
+		for ( uint8_t x = 0; x < size_x; x++ )  {
+
+			if ( p[ (y*size_x) + x ] != mask )
+				((uint8_t*)VIDEO_MEM)[ ((y+pos_y-(size_y/2))*VIDEO_RES_X) + ( x + pos_x - (size_x/2) ) ] = p[ (y*size_x) + x ];
+		}
+	}
 }

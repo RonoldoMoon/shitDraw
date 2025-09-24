@@ -49,4 +49,5 @@ void writeStringColor(const char* data, uint8_t color );
 void hPrintWord(uint16_t x); 
 void hPrintByte(uint8_t x);
 
+void putSprite(const uint8_t* p, uint8_t size_x, uint8_t size_y, uint8_t pos_x, uint8_t pos_y, uint8_t mask); 
 #endif //MYLIB_H
