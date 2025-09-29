@@ -164,3 +164,40 @@ void putSprite(const uint8_t* p, uint8_t size_x, uint8_t size_y, uint8_t pos_x, 
 		}
 	}
 }
+
+int getCR0()  {
+
+	asm ( "mov %cr0, %eax" );
+}
+
+void printCR0(uint32_t x)  {
+
+	uint32_t mask = 1;
+
+	char *p[] = { "Protected Mode Enabled\n",
+		      "Monitor co-processor\n",
+		      "Emulation\n",
+		      "Task switched\n",
+		      "Extension type\n",
+		      "Numeric error\n",
+		      "Write protect\n",
+		      "Alignment mask\n",
+		      "Not-write through\n",
+		      "Cache disable\n",
+		      "Paging\n"                   };
+
+	int i = 0;
+
+	for ( ; mask < 64; mask <<= 1 , i++ )  {
+
+		if ( mask & x ) terminal_putchar('1');
+		else terminal_putchar('0');
+
+		terminal_putchar(0x20);
+
+
+		writeStringColor(p[i], 0b00001010);
+	}
+}
+
+

@@ -48,6 +48,7 @@ void terminal_putcharCOLOR(char c, uint8_t color);
 void writeStringColor(const char* data, uint8_t color );
 void hPrintWord(uint16_t x); 
 void hPrintByte(uint8_t x);
+int  getCR0();
 
 void putSprite(const uint8_t* p, uint8_t size_x, uint8_t size_y, uint8_t pos_x, uint8_t pos_y, uint8_t mask); 
 #endif //MYLIB_H

@@ -16,21 +16,10 @@ void kernel_main(void)  {
 		/* Initialize terminal interface */
 		terminal_initialize();
 
-			/* Newline support is left as an exercise. */
-			//terminal_writestring("Hello, kernel Worldz :D!\n");
-			writeStringColor("Hello,\nkernel WORLDZ!\n", 0b00001010);
-			hPrintWord(0xB00F);
-			setVideoMode13();
-			for( int i = 0; i < 0xFFFF; i++ )  p[i] = 0b01011110;
-/*
-			for( int x = 0; x < 48; x++ )  {
-
-				for( int y = 0; y < 48; y++ )  {
-
-					if ( kirbo_48[ ((y)*48) + x ] != 0xff )
-					p[ ((y)*320) + x ] = kirbo_48[ ((y)*48) + x ];
-				}
-			}
-			*/
-			putSprite(kirbo_48, 48, 48, 160, 100, 0xFF);
+			writeStringColor("Hello, welcome to shitDraw v0.01!\n\n", 0b00001011);
+			writeStringColor("let us peek at the CR0 register\n", 0b00001111);
+			printCR0(getCR0());
+//			setVideoMode13();
+//			for( int i = 0; i < 0xFFFF; i++ )  p[i] = 0b01011110;
+//			putSprite(kirbo_48, 48, 48, 160, 100, 0xFF);
 }
