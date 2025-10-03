@@ -103,6 +103,19 @@ int test1(int balls)  {
 	    );
 }
 
+void hPrint32(uint32_t x)  {
+
+	uint16_t i, y;
+
+	for ( i = 0; i < 8; i++ )  {
+
+		y = x << (4*i);
+		y = y >> 28;
+
+		if ( y < 10 ) terminal_putchar( y + 48 );
+		else          terminal_putchar( y + 55 );
+	}
+}
 void hPrintWord(uint16_t x)  {
 
 	uint16_t i, y;
@@ -200,4 +213,8 @@ void printCR0(uint32_t x)  {
 	}
 }
 
+void store_idt(idt_t *p)  {
+
+	asm volatile ( "sidt %0" : "=m"(*p));
+}
 

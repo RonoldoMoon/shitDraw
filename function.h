@@ -9,6 +9,11 @@
 #define VGA_HEIGHT  25
 #define VGA_MEMORY  0xB8000 
 
+typedef struct idt_s  {
+
+	void *base;
+	unsigned short length;
+} idt_t;
 
 /* Hardware text mode color constants. */
 enum vga_color {
@@ -46,9 +51,12 @@ int test();
 int test1(int balls);
 void terminal_putcharCOLOR(char c, uint8_t color); 
 void writeStringColor(const char* data, uint8_t color );
+void hPrint32  (uint32_t x);
 void hPrintWord(uint16_t x); 
 void hPrintByte(uint8_t x);
 int  getCR0();
+
+void store_idt(idt_t *p);
 
 void putSprite(const uint8_t* p, uint8_t size_x, uint8_t size_y, uint8_t pos_x, uint8_t pos_y, uint8_t mask); 
 #endif //MYLIB_H
