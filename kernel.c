@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "function.h"
 #include "kirbo.h"
+#include "memory.h"
 
 /******************
  * mode 13
@@ -10,9 +11,15 @@
  * pixle depth 8bit RRRGGGBB???
  */
 #define COLOR 0b00001111
+
+gdt_entry_t gdt[3];
+gdt_ptr_t   gdtPointer;
+
+
 void kernel_main(void)  {
 
 	uint8_t* p = (uint8_t*)0xA0000;
+
 		/* Initialize terminal interface */
 		terminal_initialize();
 
@@ -21,7 +28,7 @@ void kernel_main(void)  {
 			printCR0(getCR0());
 			idt_t myThing;
 			store_idt(&myThing);
-			hPrint32(myThing.base);
+			hPrint32(GDT_Descriptor);
 			hPrintWord(myThing.length);
 
 			//writeStringColor("\n", COLOR);

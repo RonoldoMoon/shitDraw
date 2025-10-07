@@ -9,7 +9,7 @@ GDT_Start:
 
   code_descriptor:
 
-    dw 0xFFFF ;first 16 bytes of the limit.
+    dw 0xFFFF ;first 16 bits of the limit.
     db 0      ;24 bits of the base
     dw 0      ; "
     db 10011010 ; pres,priv,type | TypeFlags
